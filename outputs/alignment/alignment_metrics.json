@@ -1,0 +1,41 @@
+{
+  "pipeline_stage": "Stage 2 Sensor Alignment Validation",
+  "sample_token": "ca9a282c9e77460f8360f564131a8af5",
+  "scene_name": "scene-0061",
+  "camera_sensor": "CAM_FRONT",
+  "radar_sensor": "RADAR_FRONT",
+  "camera_timestamp_us": 1532402927612460,
+  "radar_timestamp_us": 1532402927664178,
+  "timestamp_difference_ms": 51.718,
+  "timestamp_difference_us": 51718,
+  "raw_radar_point_count": 74,
+  "positive_depth_point_count": 74,
+  "in_image_point_count": 61,
+  "nuscenes_explorer_match_count": 61,
+  "depth_range_m": [
+    10.40389900128932,
+    83.40923334328522
+  ],
+  "image_resolution": [
+    1600,
+    900
+  ],
+  "camera_intrinsic_matrix": [
+    [
+      1266.417203046554,
+      0.0,
+      816.2670197447984
+    ],
+    [
+      0.0,
+      1266.417203046554,
+      491.50706579294757
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "disclaimer": "Geometric sensor projection only. No depth estimation, collision prediction, or semantic occupancy."
+}

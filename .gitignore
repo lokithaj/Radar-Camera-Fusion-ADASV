@@ -1,0 +1,26 @@
+
+# Python environment and cache
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Secrets
+.env
+
+# Model weights
+*.pth
+*.pth.tar
+*.ckpt
+
+# nuScenes dataset
+samples/
+sweeps/
+maps/
+v1.0-mini/
+data/nuscenes/
+nuscenes/
+
+# Dataset metadata
+*.pkl
+*.bin

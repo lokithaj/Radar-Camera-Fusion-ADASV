@@ -1,0 +1,2334 @@
+{
+  "pipeline_stage": "Stage 5 Evidence-Attributed Hazard Volume (EAHV) Prototype",
+  "sample_token": "ca9a282c9e77460f8360f564131a8af5",
+  "scene_name": "scene-0061",
+  "reference_coordinate_frame": "Ego-Vehicle Coordinate System at Camera Keyframe Timestamp (V_ego)",
+  "voxel_grid_specification": {
+    "x_bounds_m": [
+      0.0,
+      60.0
+    ],
+    "y_bounds_m": [
+      -25.0,
+      25.0
+    ],
+    "z_bounds_m": [
+      -2.0,
+      4.0
+    ],
+    "voxel_size_m": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "dimensions_cells": [
+      120,
+      100,
+      12
+    ],
+    "total_voxels": 144000,
+    "voxel_volume_m3": 0.125,
+    "total_volume_m3": 18000.0
+  },
+  "voxel_state_taxonomy": {
+    "unknown_unobserved_voxels": {
+      "count": 143952,
+      "percentage": 99.9667,
+      "definition": "Spatial volume containing zero physical radar returns. Monocular camera cannot measure dense depth. Strictly unknown / unobserved space; NOT labeled as free or occupied."
+    },
+    "radar_supported_voxels": {
+      "count": 48,
+      "percentage": 0.0333,
+      "definition": "Spatial volume containing physical millimeter-wave radar returns from reference keyframe within grid boundaries."
+    },
+    "partition_integrity": {
+      "sum_voxels": 144000,
+      "matches_total_grid": true,
+      "double_counting_detected": false
+    }
+  },
+  "radar_return_spatial_partition": {
+    "total_sweep_0_returns": 74,
+    "returns_inside_grid_bounds": 48,
+    "returns_outside_grid_bounds": 26,
+    "unique_voxels_occupied": 48,
+    "bijection_check": {
+      "points_per_occupied_voxel": 1.0,
+      "multiple_returns_per_voxel_detected": false,
+      "empty_occupied_voxels_detected": false
+    }
+  },
+  "evidence_attribution_metrics": {
+    "temporal_candidate_association": {
+      "source_pipeline": "Stage 4B Consecutive Sweep Candidate Association (Sweeps 0 -> 1)",
+      "exploratory_spatial_gate_m": 1.5,
+      "exploratory_doppler_gate_m_s": 2.5,
+      "heuristic_candidate_associated_returns": {
+        "count": 19,
+        "definition": "Radar returns with unique 1-to-1 candidate association in consecutive sweep under exploratory gating. Labeled as heuristic candidate evidence, NOT confirmed tracking."
+      },
+      "ambiguous_candidate_returns": {
+        "count": 13,
+        "definition": "Radar returns with multiple candidate associations or destination contention in consecutive sweep under exploratory gating."
+      },
+      "isolated_radar_returns": {
+        "count": 16,
+        "definition": "Radar returns with zero candidate associations in consecutive sweep under exploratory gating."
+      },
+      "partition_integrity": {
+        "sum_temporal_categories": 48,
+        "matches_total_in_grid": true,
+        "double_counting_detected": false
+      }
+    },
+    "camera_projection_context": {
+      "source_pipeline": "Stage 3 Multi-Sensor Geometric Alignment & Perspective Projection",
+      "camera_sensor": "CAM_FRONT",
+      "projects_into_camera_viewport": {
+        "count": 41,
+        "definition": "Radar returns whose 3D coordinate projects geometrically inside CAM_FRONT image bounds (Z_cam > 0, 0 <= u < 1600, 0 <= v < 900). Geometric projection ONLY; does NOT verify optical line-of-sight visibility or absence of occlusion."
+      },
+      "outside_camera_viewport": {
+        "count": 7,
+        "definition": "Radar returns whose 3D coordinate falls outside CAM_FRONT image bounds or has Z_cam <= 0."
+      },
+      "partition_integrity": {
+        "sum_projection_categories": 48,
+        "matches_total_in_grid": true,
+        "double_counting_detected": false
+      }
+    },
+    "two_way_cross_tabulation": {
+      "description": "Mutually exclusive and exhaustive cross-tabulation of the 48 radar-supported voxels.",
+      "matrix": {
+        "candidate_associated": {
+          "in_cam": 18,
+          "outside_cam": 1,
+          "total": 19
+        },
+        "ambiguous": {
+          "in_cam": 9,
+          "outside_cam": 4,
+          "total": 13
+        },
+        "isolated": {
+          "in_cam": 14,
+          "outside_cam": 2,
+          "total": 16
+        },
+        "totals": {
+          "in_cam": 41,
+          "outside_cam": 7,
+          "total": 48
+        }
+      }
+    }
+  },
+  "system_limitations_and_scientific_disclaimers": [
+    "No collision prediction, Time-to-Collision (TTC), or emergency braking thresholds are computed.",
+    "No neural semantic occupancy prediction is used; unobserved space is strictly designated UNKNOWN, not free or occupied.",
+    "Camera projection represents geometric pinhole ray intersection only and does NOT confirm visual line of sight or absence of foreground occlusion.",
+    "Radar Doppler velocity (vx_comp) is a 1D scalar line-of-sight measurement; transverse velocity is unmeasured and 2D velocity vectors are not inferred.",
+    "Stage 4B candidate associations are heuristic temporal proximity pairs, NOT certified object tracking tracks.",
+    "System is a research prototype for geometric evidence attribution, NOT a safety-certified ADAS system."
+  ],
+  "detailed_radar_supported_voxel_records": [
+    {
+      "radar_return_idx": 0,
+      "actual_radar_coordinates_ego_m": {
+        "x": 12.0691,
+        "y": 5.3286,
+        "z": 0.4883
+      },
+      "voxel_indices": [
+        24,
+        60,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 12.25,
+        "y": 5.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 12.0,
+        "x_max": 12.5,
+        "y_min": 5.0,
+        "y_max": 5.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.366,
+        "radar_cross_section_rcs_dbm2": 3.5,
+        "sensor_cluster_id": 3,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Ambiguous Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 10.404,
+        "camera_pixel_u": 176.7,
+        "camera_pixel_v": 608.3
+      },
+      "temporal_association_metadata": {
+        "status": "Multiple candidates or destination contention within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 1,
+      "actual_radar_coordinates_ego_m": {
+        "x": 13.4728,
+        "y": 4.3339,
+        "z": 0.4861
+      },
+      "voxel_indices": [
+        26,
+        58,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 13.25,
+        "y": 4.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 13.0,
+        "x_max": 13.5,
+        "y_min": 4.0,
+        "y_max": 4.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.181,
+        "radar_cross_section_rcs_dbm2": 0.0,
+        "sensor_cluster_id": 5,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Ambiguous Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 11.802,
+        "camera_pixel_u": 360.0,
+        "camera_pixel_v": 594.0
+      },
+      "temporal_association_metadata": {
+        "status": "Multiple candidates or destination contention within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 2,
+      "actual_radar_coordinates_ego_m": {
+        "x": 14.6721,
+        "y": 4.5384,
+        "z": 0.4844
+      },
+      "voxel_indices": [
+        29,
+        59,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 14.75,
+        "y": 4.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 14.5,
+        "x_max": 15.0,
+        "y_min": 4.5,
+        "y_max": 5.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.178,
+        "radar_cross_section_rcs_dbm2": 8.0,
+        "sensor_cluster_id": 6,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Ambiguous Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 13.002,
+        "camera_pixel_u": 382.9,
+        "camera_pixel_v": 584.0
+      },
+      "temporal_association_metadata": {
+        "status": "Multiple candidates or destination contention within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 3,
+      "actual_radar_coordinates_ego_m": {
+        "x": 13.9151,
+        "y": -6.8645,
+        "z": 0.4838
+      },
+      "voxel_indices": [
+        27,
+        36,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 13.75,
+        "y": -6.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 13.5,
+        "x_max": 14.0,
+        "y_min": -7.0,
+        "y_max": -6.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.116,
+        "radar_cross_section_rcs_dbm2": 5.5,
+        "sensor_cluster_id": 8,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Ambiguous Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 12.181,
+        "camera_pixel_u": 1538.8,
+        "camera_pixel_v": 591.7
+      },
+      "temporal_association_metadata": {
+        "status": "Multiple candidates or destination contention within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 4,
+      "actual_radar_coordinates_ego_m": {
+        "x": 14.1203,
+        "y": -8.2638,
+        "z": 0.4833
+      },
+      "voxel_indices": [
+        28,
+        33,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 14.25,
+        "y": -8.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 14.0,
+        "x_max": 14.5,
+        "y_min": -8.5,
+        "y_max": -8.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.083,
+        "radar_cross_section_rcs_dbm2": -3.0,
+        "sensor_cluster_id": 9,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Ambiguous Candidate Evidence",
+        "camera_projection_context": "Outside Camera Viewport",
+        "projects_into_camera_viewport": false,
+        "camera_depth_m": 12.378,
+        "camera_pixel_u": null,
+        "camera_pixel_v": null
+      },
+      "temporal_association_metadata": {
+        "status": "Multiple candidates or destination contention within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 5,
+      "actual_radar_coordinates_ego_m": {
+        "x": 17.0721,
+        "y": 4.5475,
+        "z": 0.4809
+      },
+      "voxel_indices": [
+        34,
+        59,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 17.25,
+        "y": 4.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 17.0,
+        "x_max": 17.5,
+        "y_min": 4.5,
+        "y_max": 5.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": 0.054,
+        "radar_cross_section_rcs_dbm2": 0.5,
+        "sensor_cluster_id": 11,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 15.402,
+        "camera_pixel_u": 450.8,
+        "camera_pixel_v": 568.8
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 6,
+      "actual_radar_coordinates_ego_m": {
+        "x": 16.3151,
+        "y": -6.8555,
+        "z": 0.4803
+      },
+      "voxel_indices": [
+        32,
+        36,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 16.25,
+        "y": -6.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 16.0,
+        "x_max": 16.5,
+        "y_min": -7.0,
+        "y_max": -6.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.157,
+        "radar_cross_section_rcs_dbm2": 1.0,
+        "sensor_cluster_id": 12,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Ambiguous Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 14.581,
+        "camera_pixel_u": 1420.2,
+        "camera_pixel_v": 574.4
+      },
+      "temporal_association_metadata": {
+        "status": "Multiple candidates or destination contention within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 7,
+      "actual_radar_coordinates_ego_m": {
+        "x": 17.8781,
+        "y": 2.9505,
+        "z": 0.4794
+      },
+      "voxel_indices": [
+        35,
+        55,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 17.75,
+        "y": 2.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 17.5,
+        "x_max": 18.0,
+        "y_min": 2.5,
+        "y_max": 3.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.148,
+        "radar_cross_section_rcs_dbm2": 4.0,
+        "sensor_cluster_id": 13,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 16.199,
+        "camera_pixel_u": 594.0,
+        "camera_pixel_v": 564.8
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 9,
+        "dst_x_ego": 17.75756072998047,
+        "dst_y_ego": 2.9821581840515137,
+        "spatial_separation_m": 0.12461082637310028,
+        "delta_vx_comp_m_s": 0.029226630926132202,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 8,
+      "actual_radar_coordinates_ego_m": {
+        "x": 17.8683,
+        "y": 5.5505,
+        "z": 0.4798
+      },
+      "voxel_indices": [
+        35,
+        61,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 17.75,
+        "y": 5.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 17.5,
+        "x_max": 18.0,
+        "y_min": 5.5,
+        "y_max": 6.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": 0.041,
+        "radar_cross_section_rcs_dbm2": 9.5,
+        "sensor_cluster_id": 14,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 16.204,
+        "camera_pixel_u": 390.8,
+        "camera_pixel_v": 564.6
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 9,
+      "actual_radar_coordinates_ego_m": {
+        "x": 17.7166,
+        "y": -7.2502,
+        "z": 0.4781
+      },
+      "voxel_indices": [
+        35,
+        35,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 17.75,
+        "y": -7.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 17.5,
+        "x_max": 18.0,
+        "y_min": -7.5,
+        "y_max": -7.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.166,
+        "radar_cross_section_rcs_dbm2": 5.0,
+        "sensor_cluster_id": 15,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Ambiguous Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 15.98,
+        "camera_pixel_u": 1399.3,
+        "camera_pixel_v": 566.7
+      },
+      "temporal_association_metadata": {
+        "status": "Multiple candidates or destination contention within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 10,
+      "actual_radar_coordinates_ego_m": {
+        "x": 19.4713,
+        "y": 4.7565,
+        "z": 0.4774
+      },
+      "voxel_indices": [
+        38,
+        59,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 19.25,
+        "y": 4.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 19.0,
+        "x_max": 19.5,
+        "y_min": 4.5,
+        "y_max": 5.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.164,
+        "radar_cross_section_rcs_dbm2": 18.0,
+        "sensor_cluster_id": 16,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Ambiguous Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 17.803,
+        "camera_pixel_u": 486.2,
+        "camera_pixel_v": 557.6
+      },
+      "temporal_association_metadata": {
+        "status": "Multiple candidates or destination contention within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 11,
+      "actual_radar_coordinates_ego_m": {
+        "x": 20.8728,
+        "y": 4.3618,
+        "z": 0.4753
+      },
+      "voxel_indices": [
+        41,
+        58,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 20.75,
+        "y": 4.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 20.5,
+        "x_max": 21.0,
+        "y_min": 4.0,
+        "y_max": 4.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.156,
+        "radar_cross_section_rcs_dbm2": 4.0,
+        "sensor_cluster_id": 18,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Ambiguous Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 19.202,
+        "camera_pixel_u": 536.8,
+        "camera_pixel_v": 552.4
+      },
+      "temporal_association_metadata": {
+        "status": "Multiple candidates or destination contention within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 12,
+      "actual_radar_coordinates_ego_m": {
+        "x": 20.4645,
+        "y": 6.5603,
+        "z": 0.4762
+      },
+      "voxel_indices": [
+        40,
+        63,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 20.25,
+        "y": 6.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 20.0,
+        "x_max": 20.5,
+        "y_min": 6.5,
+        "y_max": 7.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.176,
+        "radar_cross_section_rcs_dbm2": 9.5,
+        "sensor_cluster_id": 19,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 18.806,
+        "camera_pixel_u": 382.7,
+        "camera_pixel_v": 553.7
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 14,
+        "dst_x_ego": 20.73895835876465,
+        "dst_y_ego": 6.199466705322266,
+        "spatial_separation_m": 0.45333853363990784,
+        "delta_vx_comp_m_s": 0.19695939123630524,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 13,
+      "actual_radar_coordinates_ego_m": {
+        "x": 17.4434,
+        "y": 12.1489,
+        "z": 0.4815
+      },
+      "voxel_indices": [
+        34,
+        74,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 17.25,
+        "y": 12.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 17.0,
+        "x_max": 17.5,
+        "y_min": 12.0,
+        "y_max": 12.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.186,
+        "radar_cross_section_rcs_dbm2": -1.0,
+        "sensor_cluster_id": 20,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Ambiguous Candidate Evidence",
+        "camera_projection_context": "Outside Camera Viewport",
+        "projects_into_camera_viewport": false,
+        "camera_depth_m": 15.817,
+        "camera_pixel_u": null,
+        "camera_pixel_v": null
+      },
+      "temporal_association_metadata": {
+        "status": "Multiple candidates or destination contention within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 14,
+      "actual_radar_coordinates_ego_m": {
+        "x": 17.8441,
+        "y": 11.9504,
+        "z": 0.4808
+      },
+      "voxel_indices": [
+        35,
+        73,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 17.75,
+        "y": 11.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 17.5,
+        "x_max": 18.0,
+        "y_min": 11.5,
+        "y_max": 12.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.042,
+        "radar_cross_section_rcs_dbm2": -2.0,
+        "sensor_cluster_id": 21,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Ambiguous Candidate Evidence",
+        "camera_projection_context": "Outside Camera Viewport",
+        "projects_into_camera_viewport": false,
+        "camera_depth_m": 16.216,
+        "camera_pixel_u": null,
+        "camera_pixel_v": null
+      },
+      "temporal_association_metadata": {
+        "status": "Multiple candidates or destination contention within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 15,
+      "actual_radar_coordinates_ego_m": {
+        "x": 23.0645,
+        "y": 6.5701,
+        "z": 0.4724
+      },
+      "voxel_indices": [
+        46,
+        63,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 23.25,
+        "y": 6.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 23.0,
+        "x_max": 23.5,
+        "y_min": 6.5,
+        "y_max": 7.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.169,
+        "radar_cross_section_rcs_dbm2": 19.0,
+        "sensor_cluster_id": 23,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 21.406,
+        "camera_pixel_u": 435.7,
+        "camera_pixel_v": 545.5
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 17,
+        "dst_x_ego": 22.936588287353516,
+        "dst_y_ego": 6.612193584442139,
+        "spatial_separation_m": 0.13463175296783447,
+        "delta_vx_comp_m_s": 0.10455837845802307,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 16,
+      "actual_radar_coordinates_ego_m": {
+        "x": 24.666,
+        "y": 6.1761,
+        "z": 0.47
+      },
+      "voxel_indices": [
+        49,
+        62,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 24.75,
+        "y": 6.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 24.5,
+        "x_max": 25.0,
+        "y_min": 6.0,
+        "y_max": 6.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.231,
+        "radar_cross_section_rcs_dbm2": 12.0,
+        "sensor_cluster_id": 24,
+        "dynamic_property_code": 3
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 23.005,
+        "camera_pixel_u": 484.3,
+        "camera_pixel_v": 541.4
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 17,
+      "actual_radar_coordinates_ego_m": {
+        "x": 21.4396,
+        "y": 13.164,
+        "z": 0.4757
+      },
+      "voxel_indices": [
+        42,
+        76,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 21.25,
+        "y": 13.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 21.0,
+        "x_max": 21.5,
+        "y_min": 13.0,
+        "y_max": 13.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.19,
+        "radar_cross_section_rcs_dbm2": 1.0,
+        "sensor_cluster_id": 25,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Ambiguous Candidate Evidence",
+        "camera_projection_context": "Outside Camera Viewport",
+        "projects_into_camera_viewport": false,
+        "camera_depth_m": 19.819,
+        "camera_pixel_u": null,
+        "camera_pixel_v": null
+      },
+      "temporal_association_metadata": {
+        "status": "Multiple candidates or destination contention within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 18,
+      "actual_radar_coordinates_ego_m": {
+        "x": 22.2411,
+        "y": 12.767,
+        "z": 0.4745
+      },
+      "voxel_indices": [
+        44,
+        75,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 22.25,
+        "y": 12.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 22.0,
+        "x_max": 22.5,
+        "y_min": 12.5,
+        "y_max": 13.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.19,
+        "radar_cross_section_rcs_dbm2": -2.5,
+        "sensor_cluster_id": 26,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Ambiguous Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 20.618,
+        "camera_pixel_u": 40.2,
+        "camera_pixel_v": 547.4
+      },
+      "temporal_association_metadata": {
+        "status": "Multiple candidates or destination contention within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 19,
+      "actual_radar_coordinates_ego_m": {
+        "x": 25.918,
+        "y": -7.6193,
+        "z": 0.466
+      },
+      "voxel_indices": [
+        51,
+        34,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 25.75,
+        "y": -7.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 25.5,
+        "x_max": 26.0,
+        "y_min": -8.0,
+        "y_max": -7.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.153,
+        "radar_cross_section_rcs_dbm2": 7.0,
+        "sensor_cluster_id": 27,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 24.179,
+        "camera_pixel_u": 1223.3,
+        "camera_pixel_v": 539.4
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 19,
+        "dst_x_ego": 25.6187686920166,
+        "dst_y_ego": -7.572512626647949,
+        "spatial_separation_m": 0.30285292863845825,
+        "delta_vx_comp_m_s": 0.019492924213409424,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 20,
+      "actual_radar_coordinates_ego_m": {
+        "x": 27.518,
+        "y": -7.6132,
+        "z": 0.4637
+      },
+      "voxel_indices": [
+        55,
+        34,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 27.75,
+        "y": -7.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 27.5,
+        "x_max": 28.0,
+        "y_min": -8.0,
+        "y_max": -7.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.166,
+        "radar_cross_section_rcs_dbm2": 11.5,
+        "sensor_cluster_id": 29,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 25.779,
+        "camera_pixel_u": 1198.2,
+        "camera_pixel_v": 536.1
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 20,
+        "dst_x_ego": 28.01871109008789,
+        "dst_y_ego": -7.558621406555176,
+        "spatial_separation_m": 0.5037011504173279,
+        "delta_vx_comp_m_s": 0.027475744485855103,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": false
+      }
+    },
+    {
+      "radar_return_idx": 21,
+      "actual_radar_coordinates_ego_m": {
+        "x": 21.4124,
+        "y": 20.3639,
+        "z": 0.4769
+      },
+      "voxel_indices": [
+        42,
+        90,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 21.25,
+        "y": 20.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 21.0,
+        "x_max": 21.5,
+        "y_min": 20.0,
+        "y_max": 20.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": 0.042,
+        "radar_cross_section_rcs_dbm2": 3.5,
+        "sensor_cluster_id": 33,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Outside Camera Viewport",
+        "projects_into_camera_viewport": false,
+        "camera_depth_m": 19.832,
+        "camera_pixel_u": null,
+        "camera_pixel_v": null
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 22,
+      "actual_radar_coordinates_ego_m": {
+        "x": 30.5187,
+        "y": -7.8019,
+        "z": 0.4592
+      },
+      "voxel_indices": [
+        61,
+        34,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 30.75,
+        "y": -7.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 30.5,
+        "x_max": 31.0,
+        "y_min": -8.0,
+        "y_max": -7.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.183,
+        "radar_cross_section_rcs_dbm2": 4.0,
+        "sensor_cluster_id": 34,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 28.779,
+        "camera_pixel_u": 1167.5,
+        "camera_pixel_v": 530.9
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 23,
+        "dst_x_ego": 31.618627548217773,
+        "dst_y_ego": -7.537785053253174,
+        "spatial_separation_m": 1.1311885118484497,
+        "delta_vx_comp_m_s": 0.03620034456253052,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 23,
+      "actual_radar_coordinates_ego_m": {
+        "x": 22.8109,
+        "y": 20.7692,
+        "z": 0.4749
+      },
+      "voxel_indices": [
+        45,
+        91,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 22.75,
+        "y": 20.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 22.5,
+        "x_max": 23.0,
+        "y_min": 20.5,
+        "y_max": 21.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": 0.053,
+        "radar_cross_section_rcs_dbm2": 4.0,
+        "sensor_cluster_id": 35,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Outside Camera Viewport",
+        "projects_into_camera_viewport": false,
+        "camera_depth_m": 21.233,
+        "camera_pixel_u": null,
+        "camera_pixel_v": null
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 22,
+        "dst_x_ego": 23.254337310791016,
+        "dst_y_ego": 20.81426429748535,
+        "spatial_separation_m": 0.44570788741111755,
+        "delta_vx_comp_m_s": 0.13620078563690186,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 24,
+      "actual_radar_coordinates_ego_m": {
+        "x": 19.7981,
+        "y": 24.1579,
+        "z": 0.4798
+      },
+      "voxel_indices": [
+        39,
+        98,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 19.75,
+        "y": 24.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 19.5,
+        "x_max": 20.0,
+        "y_min": 24.0,
+        "y_max": 24.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": 0.079,
+        "radar_cross_section_rcs_dbm2": 10.5,
+        "sensor_cluster_id": 38,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Outside Camera Viewport",
+        "projects_into_camera_viewport": false,
+        "camera_depth_m": 18.24,
+        "camera_pixel_u": null,
+        "camera_pixel_v": null
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 26,
+      "actual_radar_coordinates_ego_m": {
+        "x": 34.9081,
+        "y": -4.9853,
+        "z": 0.4532
+      },
+      "voxel_indices": [
+        69,
+        40,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 34.75,
+        "y": -4.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 34.5,
+        "x_max": 35.0,
+        "y_min": -5.0,
+        "y_max": -4.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.016,
+        "radar_cross_section_rcs_dbm2": 14.0,
+        "sensor_cluster_id": 41,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 33.184,
+        "camera_pixel_u": 1014.3,
+        "camera_pixel_v": 524.9
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 25,
+        "dst_x_ego": 34.60581588745117,
+        "dst_y_ego": -5.320458889007568,
+        "spatial_separation_m": 0.45131975412368774,
+        "delta_vx_comp_m_s": 0.020697496831417084,
+        "same_sensor_cluster_id": true,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 27,
+      "actual_radar_coordinates_ego_m": {
+        "x": 34.3262,
+        "y": -9.7876,
+        "z": 0.4534
+      },
+      "voxel_indices": [
+        68,
+        30,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 34.25,
+        "y": -9.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 34.0,
+        "x_max": 34.5,
+        "y_min": -10.0,
+        "y_max": -9.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.167,
+        "radar_cross_section_rcs_dbm2": 9.5,
+        "sensor_cluster_id": 42,
+        "dynamic_property_code": 3
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 32.575,
+        "camera_pixel_u": 1204.6,
+        "camera_pixel_v": 525.8
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 27,
+        "dst_x_ego": 34.62666320800781,
+        "dst_y_ego": -8.920397758483887,
+        "spatial_separation_m": 0.9177401065826416,
+        "delta_vx_comp_m_s": 0.18705521523952484,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": false
+      }
+    },
+    {
+      "radar_return_idx": 28,
+      "actual_radar_coordinates_ego_m": {
+        "x": 34.4531,
+        "y": 9.6131,
+        "z": 0.4561
+      },
+      "voxel_indices": [
+        68,
+        69,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 34.25,
+        "y": 9.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 34.0,
+        "x_max": 34.5,
+        "y_min": 9.5,
+        "y_max": 10.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.008,
+        "radar_cross_section_rcs_dbm2": 4.0,
+        "sensor_cluster_id": 43,
+        "dynamic_property_code": 3
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 32.812,
+        "camera_pixel_u": 453.0,
+        "camera_pixel_v": 524.8
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 29,
+      "actual_radar_coordinates_ego_m": {
+        "x": 37.2817,
+        "y": 2.0237,
+        "z": 0.4508
+      },
+      "voxel_indices": [
+        74,
+        54,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 37.25,
+        "y": 2.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 37.0,
+        "x_max": 37.5,
+        "y_min": 2.0,
+        "y_max": 2.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": 4.883,
+        "radar_cross_section_rcs_dbm2": 29.5,
+        "sensor_cluster_id": 45,
+        "dynamic_property_code": 0
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 35.597,
+        "camera_pixel_u": 752.0,
+        "camera_pixel_v": 522.0
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 29,
+        "dst_x_ego": 37.762882232666016,
+        "dst_y_ego": 2.0979349613189697,
+        "spatial_separation_m": 0.48688390851020813,
+        "delta_vx_comp_m_s": 0.029446125030517578,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 30,
+      "actual_radar_coordinates_ego_m": {
+        "x": 38.8681,
+        "y": 5.6297,
+        "z": 0.449
+      },
+      "voxel_indices": [
+        77,
+        61,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 38.75,
+        "y": 5.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 38.5,
+        "x_max": 39.0,
+        "y_min": 5.5,
+        "y_max": 6.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.176,
+        "radar_cross_section_rcs_dbm2": 0.0,
+        "sensor_cluster_id": 46,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 37.204,
+        "camera_pixel_u": 632.3,
+        "camera_pixel_v": 520.4
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 31,
+      "actual_radar_coordinates_ego_m": {
+        "x": 40.2975,
+        "y": -2.165,
+        "z": 0.4457
+      },
+      "voxel_indices": [
+        80,
+        45,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 40.25,
+        "y": -2.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 40.0,
+        "x_max": 40.5,
+        "y_min": -2.5,
+        "y_max": -2.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": 11.106,
+        "radar_cross_section_rcs_dbm2": 16.5,
+        "sensor_cluster_id": 47,
+        "dynamic_property_code": 0
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 38.589,
+        "camera_pixel_u": 895.0,
+        "camera_pixel_v": 519.4
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 33,
+        "dst_x_ego": 41.38827896118164,
+        "dst_y_ego": -2.2811524868011475,
+        "spatial_separation_m": 1.0969386100769043,
+        "delta_vx_comp_m_s": 0.036957740783691406,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 32,
+      "actual_radar_coordinates_ego_m": {
+        "x": 40.4764,
+        "y": 3.4357,
+        "z": 0.4463
+      },
+      "voxel_indices": [
+        80,
+        56,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 40.25,
+        "y": 3.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 40.0,
+        "x_max": 40.5,
+        "y_min": 3.0,
+        "y_max": 3.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.145,
+        "radar_cross_section_rcs_dbm2": 0.0,
+        "sensor_cluster_id": 49,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 38.8,
+        "camera_pixel_u": 711.8,
+        "camera_pixel_v": 519.0
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 33,
+      "actual_radar_coordinates_ego_m": {
+        "x": 36.7571,
+        "y": -17.9785,
+        "z": 0.4485
+      },
+      "voxel_indices": [
+        73,
+        14,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 36.75,
+        "y": -17.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 36.5,
+        "x_max": 37.0,
+        "y_min": -18.0,
+        "y_max": -17.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.053,
+        "radar_cross_section_rcs_dbm2": 0.0,
+        "sensor_cluster_id": 52,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 34.959,
+        "camera_pixel_u": 1475.3,
+        "camera_pixel_v": 523.4
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 34,
+      "actual_radar_coordinates_ego_m": {
+        "x": 41.2741,
+        "y": 4.0387,
+        "z": 0.4452
+      },
+      "voxel_indices": [
+        82,
+        58,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 41.25,
+        "y": 4.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 41.0,
+        "x_max": 41.5,
+        "y_min": 4.0,
+        "y_max": 4.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.178,
+        "radar_cross_section_rcs_dbm2": -0.5,
+        "sensor_cluster_id": 53,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 39.601,
+        "camera_pixel_u": 694.8,
+        "camera_pixel_v": 518.3
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 35,
+      "actual_radar_coordinates_ego_m": {
+        "x": 38.7435,
+        "y": -14.3709,
+        "z": 0.4462
+      },
+      "voxel_indices": [
+        77,
+        21,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 38.75,
+        "y": -14.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 38.5,
+        "x_max": 39.0,
+        "y_min": -14.5,
+        "y_max": -14.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.117,
+        "radar_cross_section_rcs_dbm2": 1.0,
+        "sensor_cluster_id": 54,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 36.966,
+        "camera_pixel_u": 1316.3,
+        "camera_pixel_v": 521.2
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 34,
+        "dst_x_ego": 38.660160064697266,
+        "dst_y_ego": -14.697144508361816,
+        "spatial_separation_m": 0.33669137954711914,
+        "delta_vx_comp_m_s": 0.07529865205287933,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 36,
+      "actual_radar_coordinates_ego_m": {
+        "x": 40.0236,
+        "y": 17.4341,
+        "z": 0.4491
+      },
+      "voxel_indices": [
+        80,
+        84,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 40.25,
+        "y": 17.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 40.0,
+        "x_max": 40.5,
+        "y_min": 17.0,
+        "y_max": 17.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": 0.126,
+        "radar_cross_section_rcs_dbm2": 8.5,
+        "sensor_cluster_id": 60,
+        "dynamic_property_code": 3
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 38.427,
+        "camera_pixel_u": 249.4,
+        "camera_pixel_v": 518.9
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 37,
+      "actual_radar_coordinates_ego_m": {
+        "x": 44.5239,
+        "y": -9.1491,
+        "z": 0.4385
+      },
+      "voxel_indices": [
+        89,
+        31,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 44.75,
+        "y": -9.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 44.5,
+        "x_max": 45.0,
+        "y_min": -9.5,
+        "y_max": -9.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.167,
+        "radar_cross_section_rcs_dbm2": 8.0,
+        "sensor_cluster_id": 63,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 42.776,
+        "camera_pixel_u": 1094.8,
+        "camera_pixel_v": 516.3
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 38,
+      "actual_radar_coordinates_ego_m": {
+        "x": 45.3088,
+        "y": -5.1461,
+        "z": 0.4379
+      },
+      "voxel_indices": [
+        90,
+        39,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 45.25,
+        "y": -5.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 45.0,
+        "x_max": 45.5,
+        "y_min": -5.5,
+        "y_max": -5.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": 2.362,
+        "radar_cross_section_rcs_dbm2": 14.5,
+        "sensor_cluster_id": 64,
+        "dynamic_property_code": 0
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 43.583,
+        "camera_pixel_u": 973.4,
+        "camera_pixel_v": 515.7
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 35,
+        "dst_x_ego": 45.40555953979492,
+        "dst_y_ego": -5.257948875427246,
+        "spatial_separation_m": 0.14789776504039764,
+        "delta_vx_comp_m_s": 0.21126627922058105,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 39,
+      "actual_radar_coordinates_ego_m": {
+        "x": 45.265,
+        "y": 6.4538,
+        "z": 0.4397
+      },
+      "voxel_indices": [
+        90,
+        62,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 45.25,
+        "y": 6.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 45.0,
+        "x_max": 45.5,
+        "y_min": 6.0,
+        "y_max": 6.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.211,
+        "radar_cross_section_rcs_dbm2": 25.0,
+        "sensor_cluster_id": 65,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 43.605,
+        "camera_pixel_u": 636.5,
+        "camera_pixel_v": 515.3
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 36,
+        "dst_x_ego": 45.33721923828125,
+        "dst_y_ego": 6.5418477058410645,
+        "spatial_separation_m": 0.11385124176740646,
+        "delta_vx_comp_m_s": 0.029490575194358826,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 40,
+      "actual_radar_coordinates_ego_m": {
+        "x": 47.7103,
+        "y": -5.5371,
+        "z": 0.4343
+      },
+      "voxel_indices": [
+        95,
+        38,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 47.75,
+        "y": -5.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 47.5,
+        "x_max": 48.0,
+        "y_min": -6.0,
+        "y_max": -5.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": 2.361,
+        "radar_cross_section_rcs_dbm2": 18.5,
+        "sensor_cluster_id": 69,
+        "dynamic_property_code": 0
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 45.983,
+        "camera_pixel_u": 976.4,
+        "camera_pixel_v": 514.1
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 37,
+        "dst_x_ego": 47.20204162597656,
+        "dst_y_ego": -4.647541046142578,
+        "spatial_separation_m": 1.024467945098877,
+        "delta_vx_comp_m_s": 0.22499608993530273,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 41,
+      "actual_radar_coordinates_ego_m": {
+        "x": 47.2567,
+        "y": 8.6613,
+        "z": 0.4371
+      },
+      "voxel_indices": [
+        94,
+        67,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 47.25,
+        "y": 8.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 47.0,
+        "x_max": 47.5,
+        "y_min": 8.5,
+        "y_max": 9.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.24,
+        "radar_cross_section_rcs_dbm2": 5.0,
+        "sensor_cluster_id": 70,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 45.61,
+        "camera_pixel_u": 583.4,
+        "camera_pixel_v": 514.0
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 42,
+      "actual_radar_coordinates_ego_m": {
+        "x": 47.5321,
+        "y": -11.3378,
+        "z": 0.4337
+      },
+      "voxel_indices": [
+        95,
+        27,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 47.75,
+        "y": -11.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 47.5,
+        "x_max": 48.0,
+        "y_min": -11.5,
+        "y_max": -11.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": 2.246,
+        "radar_cross_section_rcs_dbm2": 14.5,
+        "sensor_cluster_id": 71,
+        "dynamic_property_code": 0
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 45.771,
+        "camera_pixel_u": 1137.6,
+        "camera_pixel_v": 514.4
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 39,
+        "dst_x_ego": 47.84025192260742,
+        "dst_y_ego": -11.2439546585083,
+        "spatial_separation_m": 0.32207539677619934,
+        "delta_vx_comp_m_s": 0.20114684104919434,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 43,
+      "actual_radar_coordinates_ego_m": {
+        "x": 48.5238,
+        "y": -9.134,
+        "z": 0.4326
+      },
+      "voxel_indices": [
+        97,
+        31,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 48.75,
+        "y": -9.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 48.5,
+        "x_max": 49.0,
+        "y_min": -9.5,
+        "y_max": -9.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.184,
+        "radar_cross_section_rcs_dbm2": 10.5,
+        "sensor_cluster_id": 72,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 46.776,
+        "camera_pixel_u": 1071.2,
+        "camera_pixel_v": 513.8
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 40,
+        "dst_x_ego": 48.62749099731445,
+        "dst_y_ego": -9.039361953735352,
+        "spatial_separation_m": 0.1403672695159912,
+        "delta_vx_comp_m_s": 0.027696117758750916,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 44,
+      "actual_radar_coordinates_ego_m": {
+        "x": 49.7118,
+        "y": -5.9295,
+        "z": 0.4313
+      },
+      "voxel_indices": [
+        99,
+        38,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 49.75,
+        "y": -5.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 49.5,
+        "x_max": 50.0,
+        "y_min": -6.0,
+        "y_max": -5.5,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": 2.359,
+        "radar_cross_section_rcs_dbm2": 1.0,
+        "sensor_cluster_id": 74,
+        "dynamic_property_code": 0
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 47.982,
+        "camera_pixel_u": 980.4,
+        "camera_pixel_v": 513.0
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 46,
+      "actual_radar_coordinates_ego_m": {
+        "x": 50.5238,
+        "y": -9.1265,
+        "z": 0.4297
+      },
+      "voxel_indices": [
+        101,
+        31,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 50.75,
+        "y": -9.25,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 50.5,
+        "x_max": 51.0,
+        "y_min": -9.5,
+        "y_max": -9.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.191,
+        "radar_cross_section_rcs_dbm2": 0.5,
+        "sensor_cluster_id": 77,
+        "dynamic_property_code": 3
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 48.776,
+        "camera_pixel_u": 1060.8,
+        "camera_pixel_v": 512.6
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 47,
+      "actual_radar_coordinates_ego_m": {
+        "x": 53.6604,
+        "y": 7.6855,
+        "z": 0.4276
+      },
+      "voxel_indices": [
+        107,
+        65,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 53.75,
+        "y": 7.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 53.5,
+        "x_max": 54.0,
+        "y_min": 7.5,
+        "y_max": 8.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.21,
+        "radar_cross_section_rcs_dbm2": 3.0,
+        "sensor_cluster_id": 82,
+        "dynamic_property_code": 3
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 52.008,
+        "camera_pixel_u": 636.7,
+        "camera_pixel_v": 510.6
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 43,
+        "dst_x_ego": 53.53007507324219,
+        "dst_y_ego": 7.789288520812988,
+        "spatial_separation_m": 0.16664697229862213,
+        "delta_vx_comp_m_s": 0.06705407798290253,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    },
+    {
+      "radar_return_idx": 49,
+      "actual_radar_coordinates_ego_m": {
+        "x": 53.0107,
+        "y": 20.8831,
+        "z": 0.4305
+      },
+      "voxel_indices": [
+        106,
+        91,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 53.25,
+        "y": 20.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 53.0,
+        "x_max": 53.5,
+        "y_min": 20.5,
+        "y_max": 21.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": 0.067,
+        "radar_cross_section_rcs_dbm2": 1.0,
+        "sensor_cluster_id": 86,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Isolated Radar Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 51.433,
+        "camera_pixel_u": 309.6,
+        "camera_pixel_v": 510.6
+      },
+      "temporal_association_metadata": {
+        "status": "Zero admissible candidates within exploratory gates"
+      }
+    },
+    {
+      "radar_return_idx": 51,
+      "actual_radar_coordinates_ego_m": {
+        "x": 58.2838,
+        "y": 1.5029,
+        "z": 0.4199
+      },
+      "voxel_indices": [
+        116,
+        53,
+        4
+      ],
+      "voxel_centroid_ego_m": {
+        "x": 58.25,
+        "y": 1.75,
+        "z": 0.25
+      },
+      "voxel_bounding_box_m": {
+        "x_min": 58.0,
+        "x_max": 58.5,
+        "y_min": 1.5,
+        "y_max": 2.0,
+        "z_min": 0.0,
+        "z_max": 0.5
+      },
+      "physical_measurements": {
+        "compensated_doppler_component_vx_comp_m_s": -0.125,
+        "radar_cross_section_rcs_dbm2": 10.5,
+        "sensor_cluster_id": 89,
+        "dynamic_property_code": 1
+      },
+      "evidence_attribution": {
+        "temporal_candidate_tier": "Heuristic Candidate Evidence",
+        "camera_projection_context": "Projects into Camera Viewport",
+        "projects_into_camera_viewport": true,
+        "camera_depth_m": 56.596,
+        "camera_pixel_u": 790.2,
+        "camera_pixel_v": 508.8
+      },
+      "temporal_association_metadata": {
+        "destination_sweep_idx": 1,
+        "destination_local_idx": 46,
+        "dst_x_ego": 58.36587142944336,
+        "dst_y_ego": 1.6171776056289673,
+        "spatial_separation_m": 0.1407259702682495,
+        "delta_vx_comp_m_s": 0.029840722680091858,
+        "same_sensor_cluster_id": false,
+        "same_dynamic_property": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "pipeline_stage": "Stage 4B Temporal Radar Return Association",
+  "sample_token": "ca9a282c9e77460f8360f564131a8af5",
+  "scene_name": "scene-0061",
+  "reference_coordinate_frame": "Ego-Vehicle Coordinate System at Camera Keyframe Timestamp (V_ego)",
+  "nsweeps_evaluated": 3,
+  "filter_settings": {
+    "nuScenes_devkit_filters": {
+      "invalid_states": "[0] (valid cluster)",
+      "dynprop_states": "range(7) (moving, stationary, etc.)",
+      "ambig_states": "[3] (unambiguous Doppler solution)"
+    },
+    "downstream_custom_filters": "none"
+  },
+  "association_parameters": {
+    "spatial_distance_gate_m": 1.5,
+    "radial_doppler_gate_m_s": 2.5,
+    "gate_classification": "Exploratory assumptions (NOT validated or standard tracking thresholds)",
+    "methodology": "Conservative spatial gating with Doppler consistency and strict mutual 1-to-1 isolation",
+    "justification_and_limitations": "The 1.5 m spatial distance threshold and 2.5 m/s Doppler-difference threshold are exploratory assumptions derived from preliminary heuristics (assuming max relative speed <= 20 m/s over dt \u2248 75 ms). They are explicitly exploratory assumptions and are NOT claimed as validated, certified, or standard multi-object tracking thresholds."
+  },
+  "doppler_velocity_interpretation_and_angle_limitations": {
+    "field_used": "vx_comp (nuScenes point cloud row 8)",
+    "devkit_definition": "vx_comp, vy_comp are the velocities in m/s compensated by the ego motion (nuscenes/utils/data_classes.py; x is front, y is left).",
+    "sign_convention_status": "Unverified in official devkit documentation (no explicit definition of approaching vs receding sign); neutral terminology 'compensated Doppler component' is strictly maintained.",
+    "physical_interpretation": "1D scalar Doppler measurement along the radar line of sight projected onto the sensor x-axis.",
+    "measurement_nature": "Scalar line-of-sight velocity measurement only, NOT a complete 2D or 3D Cartesian velocity vector.",
+    "sensor_angle_dependency": "Because radial Doppler measures velocity along the sensor line-of-sight ray, returns at different azimuth angles (theta_1 != theta_2) have different projected Doppler values even if the target vehicle maintains constant Cartesian speed and heading. Conversely, separate objects at different bearings can coincidentally have identical Doppler values.",
+    "unmeasured_components": "Transverse (cross-range) velocity is fundamentally unmeasured by a single Doppler radar beam. Kinematic forward-projection using vx_comp as a Cartesian velocity vector is physically invalid and is not performed."
+  },
+  "consecutive_pairs": {
+    "sweep_0_to_1": {
+      "source_sweep_index": 0,
+      "destination_sweep_index": 1,
+      "source_timestamp": 1532402927664178,
+      "destination_timestamp": 1532402927739208,
+      "delta_t_ms": 75.03,
+      "source_returns_count": 74,
+      "destination_returns_count": 67,
+      "unique_candidate_pairs_count": 34,
+      "ambiguous_source_count": 14,
+      "ambiguous_destination_count": 16,
+      "unmatched_source_count": 26,
+      "unmatched_destination_count": 17,
+      "partition_integrity": {
+        "source_partition_sum": 74,
+        "source_total_returns": 74,
+        "destination_partition_sum": 67,
+        "destination_total_returns": 67,
+        "double_counting_detected": false,
+        "partitions_mutually_exclusive_and_complete": true
+      },
+      "spatial_separation_stats_m": {
+        "mean_m": 0.44500526281840663,
+        "std_m": 0.3381815842062677,
+        "min_m": 0.09738300740718842,
+        "max_m": 1.3255512714385986
+      },
+      "doppler_difference_stats_m_s": {
+        "mean_m_s": 0.07972434897194891,
+        "std_m_s": 0.07217747194563028,
+        "min_m_s": 0.01618150621652603,
+        "max_m_s": 0.22499608993530273
+      },
+      "sensor_cluster_id_agreement_count": 2,
+      "dynamic_property_agreement_count": 32
+    },
+    "sweep_1_to_2": {
+      "source_sweep_index": 1,
+      "destination_sweep_index": 2,
+      "source_timestamp": 1532402927739208,
+      "destination_timestamp": 1532402927814384,
+      "delta_t_ms": 75.176,
+      "source_returns_count": 67,
+      "destination_returns_count": 75,
+      "unique_candidate_pairs_count": 26,
+      "ambiguous_source_count": 22,
+      "ambiguous_destination_count": 24,
+      "unmatched_source_count": 19,
+      "unmatched_destination_count": 25,
+      "partition_integrity": {
+        "source_partition_sum": 67,
+        "source_total_returns": 67,
+        "destination_partition_sum": 75,
+        "destination_total_returns": 75,
+        "double_counting_detected": false,
+        "partitions_mutually_exclusive_and_complete": true
+      },
+      "spatial_separation_stats_m": {
+        "mean_m": 0.5182715264650491,
+        "std_m": 0.36266565787961014,
+        "min_m": 0.10817492008209229,
+        "max_m": 1.4205538034439087
+      },
+      "doppler_difference_stats_m_s": {
+        "mean_m_s": 0.05182584217534615,
+        "std_m_s": 0.05730194628091192,
+        "min_m_s": 0.005269862711429596,
+        "max_m_s": 0.20354795455932617
+      },
+      "sensor_cluster_id_agreement_count": 1,
+      "dynamic_property_agreement_count": 21
+    }
+  },
+  "multi_sweep_persistence": {
+    "candidate_persistence_chains_count": 20,
+    "description": "Candidate persistence chains maintaining unique 1-to-1 candidate associations continuously across all 3 sweeps (0 -> 1 -> 2); exploratory geometric links, NOT confirmed physical-object tracks."
+  },
+  "documented_limitations": [
+    "Candidate associations are exploratory geometric links and are NOT verified vehicle tracks.",
+    "The 1.5 m distance gate and 2.5 m/s Doppler gate are exploratory assumptions, NOT validated or standard tracking thresholds.",
+    "Radar Doppler velocity (vx_comp) is a 1D scalar compensated Doppler component; sign convention is not defined in official devkit documentation, transverse velocity is unmeasured, and 2D kinematic extrapolation is not valid.",
+    "Returns at different sensor line-of-sight angles exhibit different projected Doppler values even for constant vehicle velocity.",
+    "No precision, recall, MOTA, or identity consistency tracking performance metrics can be claimed without ground-truth return correspondence.",
+    "Radar cluster IDs are recycled hardware table slots (0-127) and do not represent persistent global track IDs.",
+    "Coordinate transformation into the reference ego frame compensates ego-motion, but does not compensate object motion or perform object tracking.",
+    "No collision prediction, crash probability, time-to-collision (TTC), or hazard thresholds are implemented."
+  ]
+}

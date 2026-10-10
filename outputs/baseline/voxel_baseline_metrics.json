@@ -1,0 +1,38 @@
+{
+  "pipeline_stage": "Stage 1 Baseline",
+  "description": "Discrete Radar-Return 3D Voxelisation (Non-Neural)",
+  "sample_token": "ca9a282c9e77460f8360f564131a8af5",
+  "scene_name": "scene-0061",
+  "scene_description": "Parked truck, construction, intersection, turn left, following a van",
+  "coordinate_frame": "Ego-Vehicle Coordinate System at Camera Keyframe Timestamp (V_ego)",
+  "grid_dimensions": {
+    "nx": 120,
+    "ny": 100,
+    "nz": 12
+  },
+  "voxel_resolution_m": {
+    "dx": 0.5,
+    "dy": 0.5,
+    "dz": 0.5
+  },
+  "spatial_bounds_m": {
+    "x": [
+      0.0,
+      60.0
+    ],
+    "y": [
+      -25.0,
+      25.0
+    ],
+    "z": [
+      -2.0,
+      4.0
+    ]
+  },
+  "total_voxels": 144000,
+  "occupied_voxels": 48,
+  "unknown_unobserved_voxels": 143952,
+  "occupancy_percentage": 0.03333333333333333,
+  "raw_radar_points": 74,
+  "in_roi_points": 48
+}

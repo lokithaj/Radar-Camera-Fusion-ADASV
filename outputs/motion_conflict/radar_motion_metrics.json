@@ -1,0 +1,88 @@
+{
+  "pipeline_stage": "Stage 4A Multi-Sweep Radar Motion Visualisation",
+  "sample_token": "ca9a282c9e77460f8360f564131a8af5",
+  "scene_name": "scene-0061",
+  "reference_coordinate_frame": "Ego-Vehicle Coordinate System at Camera Keyframe Timestamp (V_ego)",
+  "temporal_sweep_strategy": "forward_subsequent",
+  "temporal_strategy_explanation": "Because reference sample ca9a282c... is at the start of scene-0061 (sample[0], prev=''), consecutive sweeps 1 and 2 are forward-in-time subsequent sweeps (+75.03 ms, +150.21 ms) collected via sample_data['next'] and transformed into the reference keyframe ego frame.",
+  "nsweeps_accumulated": 3,
+  "sweep_details": [
+    {
+      "sweep_index": 0,
+      "temporal_relationship": "reference_keyframe",
+      "sample_data_token": "37091c75b9704e0daa829ba56dfa0906",
+      "is_key_frame": true,
+      "timestamp": 1532402927664178,
+      "time_offset_to_cam_keyframe_ms": 51.718,
+      "raw_pcd_point_count": 125,
+      "retained_point_count": 74,
+      "discarded_by_devkit_filter_count": 51,
+      "file_path": "samples/RADAR_FRONT/n015-2018-07-24-11-22-45+0800__RADAR_FRONT__1532402927664178.pcd"
+    },
+    {
+      "sweep_index": 1,
+      "temporal_relationship": "forward_sweep_+1",
+      "sample_data_token": "f0b8593e08594a3eb1152c138b312813",
+      "is_key_frame": false,
+      "timestamp": 1532402927739208,
+      "time_offset_to_cam_keyframe_ms": 126.748,
+      "raw_pcd_point_count": 125,
+      "retained_point_count": 67,
+      "discarded_by_devkit_filter_count": 58,
+      "file_path": "sweeps/RADAR_FRONT/n015-2018-07-24-11-22-45+0800__RADAR_FRONT__1532402927739208.pcd"
+    },
+    {
+      "sweep_index": 2,
+      "temporal_relationship": "forward_sweep_+2",
+      "sample_data_token": "5ace90b379af485b9dcb1584b01e7212",
+      "is_key_frame": false,
+      "timestamp": 1532402927814384,
+      "time_offset_to_cam_keyframe_ms": 201.924,
+      "raw_pcd_point_count": 125,
+      "retained_point_count": 75,
+      "discarded_by_devkit_filter_count": 50,
+      "file_path": "sweeps/RADAR_FRONT/n015-2018-07-24-11-22-45+0800__RADAR_FRONT__1532402927814384.pcd"
+    }
+  ],
+  "returns_summary": {
+    "total_raw_pcd_returns": 375,
+    "total_retained_returns": 216,
+    "total_discarded_returns": 159,
+    "all_coordinates_finite": true
+  },
+  "applied_filtering": {
+    "nuScenes_devkit_filters_in_from_file": {
+      "invalid_states_filter": "kept [0] (0x00=valid cluster; discards low RCS, near-field artefacts, mirrors, harmonics)",
+      "dynprop_states_filter": "kept range(7) [0..6] (moving, stationary, oncoming, etc.; discards 7=stopped)",
+      "ambig_states_filter": "kept [3] (unambiguous Doppler solution only; discards ambiguous/invalid solutions)"
+    },
+    "downstream_custom_filters": "none (all 216 retained returns preserved without spatial or velocity truncation)"
+  },
+  "dynamic_property_breakdown": {
+    "moving_points_count": 26,
+    "stationary_points_count": 116,
+    "stationary_candidate_points_count": 74,
+    "other_points_count": 0
+  },
+  "velocity_interpretation": {
+    "velocity_field_used": "vx_comp (Index 8)",
+    "interpretation": "Scalar ego-compensated radial Doppler velocity along the sensor line-of-sight.",
+    "explicit_caution": "vx_comp and vy_comp do NOT constitute a complete 2D object velocity vector. No 2D travel direction or trajectory is claimed."
+  },
+  "velocity_statistics_m_per_s": {
+    "raw_vx_mean": -8.4375,
+    "raw_vx_min": -9.75,
+    "raw_vx_max": 2.25,
+    "compensated_vx_mean": 0.37852928042411804,
+    "compensated_vx_min": -0.687228262424469,
+    "compensated_vx_max": 11.10582160949707,
+    "moving_points_compensated_vx_mean": 4.189218521118164,
+    "stationary_points_compensated_vx_mean": -0.11805590987205505
+  },
+  "documented_limitations": [
+    "Radial velocity measures 1D line-of-sight closing rate; it does not provide complete 2D or 3D object velocity vectors.",
+    "Ego-motion compensation transforms coordinate frames, but does not track or associate returns between sweeps as specific physical objects.",
+    "Radar returns are physically sparse reflections; multipath or ghost returns can occur.",
+    "No collision prediction, crash probability, or hazard thresholds are claimed."
+  ]
+}
